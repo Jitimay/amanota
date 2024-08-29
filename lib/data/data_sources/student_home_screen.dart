@@ -1,17 +1,17 @@
+import 'package:amanota/presentation/ui/screens/add_page.dart';
 import 'package:amanota/presentation/ui/screens/log_out.dart';
+import 'package:amanota/presentation/ui/screens/settings_page.dart';
+import 'package:amanota/presentation/ui/screens/view_page.dart';
 import 'package:amanota/presentation/ui/widgets/home_content.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'add_page.dart';
-import 'settings_page.dart';
-import 'view_page.dart';
 
-class HomeScreen extends StatefulWidget {
+class StudentHomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<StudentHomeScreen> {
   int _page = 0;
   int _userID = 1;
   Map<String, String> _notes = {

@@ -28,6 +28,7 @@ dev_dependencies:
 
 flutter:
   assets:
+    - images/Berthe.png
     - images/avatar.JPG
     - images/image1.jpeg
     - images/image2.jpeg

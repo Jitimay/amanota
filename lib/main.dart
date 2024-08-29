@@ -1,3 +1,5 @@
+import 'package:amanota/presentation/ui/screens/login.dart';
+import 'package:amanota/presentation/ui/screens/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:amanota/presentation/ui/screens/home_screen.dart';
 

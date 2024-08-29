@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:amanota/data/repositories/database_helper.dart';
+import 'package:amanota/data/repositories/notes_database_helper.dart'; // Import the correct helper
 
 class NotesPage extends StatefulWidget {
   final String subject;
+  final int userId; // Add userId to identify user-specific notes
   final Function(String subject, String content) updateNotes;
 
-  NotesPage({required this.subject, required this.updateNotes});
+  NotesPage({required this.subject, required this.userId, required this.updateNotes});
 
   @override
   _NotesPageState createState() => _NotesPageState();
@@ -13,7 +14,7 @@ class NotesPage extends StatefulWidget {
 
 class _NotesPageState extends State<NotesPage> {
   final TextEditingController _notesController = TextEditingController();
-  final DatabaseHelper _dbHelper = DatabaseHelper();
+  final NotesDatabaseHelper _dbHelper = NotesDatabaseHelper();
 
   @override
   void initState() {
@@ -21,8 +22,8 @@ class _NotesPageState extends State<NotesPage> {
     _loadNotes();
   }
 
-  Future<void> _loadNotes() async {
-    List<Map<String, dynamic>> notes = await _dbHelper.getNotes(widget.subject);
+  Future _loadNotes() async {
+    List<Map<String, dynamic>> notes = await _dbHelper.getNotes(widget.subject, widget.userId); // Correctly pass userId
     if (notes.isNotEmpty) {
       setState(() {
         _notesController.text = notes.first['content'];
@@ -52,7 +53,7 @@ class _NotesPageState extends State<NotesPage> {
             SizedBox(height: 16),
             ElevatedButton(
               onPressed: () async {
-                await _dbHelper.insertNote(widget.subject, _notesController.text);
+                await _dbHelper.insertNote(widget.subject, _notesController.text, widget.userId); // Insert user-specific notes
                 widget.updateNotes(widget.subject, _notesController.text);
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text('Notes saved successfully')),
